@@ -7,11 +7,12 @@ router.get('/', (req,res) => {
 });
 
 //Adding New Vendor
-
 router.post('/addvendor', actions.addNew)
 
 //Authenticate Vendor
-
 router.post('/authenticate', actions.authenticate)
+
+//Get Info of a user
+router.get('/getinfo', actions.getInfo)
 
 module.exports = router
