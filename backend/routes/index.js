@@ -6,8 +6,12 @@ router.get('/', (req,res) => {
     res.send('Hello World');
 });
 
-//Adding New Vender
+//Adding New Vendor
 
 router.post('/addvendor', actions.addNew)
+
+//Authenticate Vendor
+
+router.post('/authenticate', actions.authenticate)
 
 module.exports = router
