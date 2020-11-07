@@ -9,15 +9,19 @@ class _ConsumerHomeState extends State<ConsumerHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('BunMaska'),),
+      appBar: AppBar(
+        title: Text('BunMaska'),
+      ),
       backgroundColor: Color(0xfffcf5ee),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
             child: ListView(
               children: [
                 SizedBox(height: 20.0),
-                Text('Consumer Home'),
+                Center(child: Text('Consumer Home')),
               ],
             ),
           ),
