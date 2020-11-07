@@ -27,11 +27,26 @@ class _LoginDistributorState extends State<LoginDistributor> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    'Be a part of the BunMaska community.',
+                    'Welcome Back!',
                     style: TextStyle(
                       fontSize: 25,
                     ),
                     textAlign: TextAlign.center,
+                  ),
+                ),
+                SizedBox(height: 20.0),
+                TextFormField(
+                  decoration: InputDecoration(
+                    hintText: 'Enter your email',
+                    prefixIcon: Icon(Icons.alternate_email),
+                  ),
+                ),
+                SizedBox(height: 20.0),
+                TextFormField(
+                  obscureText: false,
+                  decoration: InputDecoration(
+                    hintText: 'Password',
+                    prefixIcon: Icon(Icons.lock_outline),
                   ),
                 ),
                 Padding(
