@@ -1,5 +1,5 @@
 var User = require('../models/user')
-var jwt = require('jwt-simple')
+var jwt = require('jsonwebtoken')
 var config = require('../config/dbConfig')
 var MenuList = require('../models/menu')
 
@@ -24,7 +24,7 @@ var functions = {
             })
         }
     },
-    authenticate: function (req, res) {
+    login: function (req, res) {
         User.findOne({
             name: req.body.name
         }, function (err, user){
@@ -34,8 +34,11 @@ var functions = {
             } else {
                 user.comparePassword(req.body.password, function (err, isMatch) {
                     if (isMatch && !err) {
-                        var token = jwt.encode(user, config.secret)
-                        res.json({sucess: true, token: token})
+                        var token = jwt.sign({user}, config.secret, (err, token) => {
+                            res.json({
+                                token
+                            })
+                        })
                     }
                     else {
                         return res.status(403).send({success: false, msg: 'Authentication failed, wrong pasword'})
@@ -46,9 +49,16 @@ var functions = {
     },
     getUserInfo: function(req, res) {
         if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer'){
-            var token = req.headers.authorization.split(' ')[1]
-            var decodedtoken = jwt.decode(token, config.secret)
-            return res.json({sucess: true, msg: 'Hello' + decodedtoken.name})
+            jwt.verify(req.token, config.secret, (err, authData) => {
+                if(err) {
+                    res.sendStatus(403)
+                } else {
+                    res.json({
+                        message: 'User Info',
+                        authData
+                    })
+                }
+            })
         }
         else {
             return res.json({success: false, msg: 'No Headers'})
@@ -111,6 +121,21 @@ var functions = {
             res.json({
                 message: err
             });
+        }
+    },
+    logout: async function(req,res){
+        try{
+            if (!req.headers['auth-token']){
+                res.json({
+                    msg: 'User not logged in'
+                })
+            }
+            delete req.headers["auth-token"]
+            res.json({msg: 'Successfully logged out'})
+        } catch (err) {
+            res.json({
+                message: err
+            })
         }
     }
 }
