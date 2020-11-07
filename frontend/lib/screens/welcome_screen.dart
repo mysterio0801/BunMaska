@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/consumer.dart';
+import 'package:frontend/screens/login_distributor.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static String id = 'welcome_screen';
@@ -14,7 +16,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Scaffold(
       backgroundColor: Color(0xfffcf5ee),
       appBar: AppBar(
-        title: Text('BunMaska'),
+        title: Center(child: Text('BunMaska')),
       ),
       body: Column(
         children: [
@@ -28,7 +30,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: RaisedButton(
-                    onPressed: null,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LoginDistributor()),
+                      );
+                    },
                     child: Text(
                       'Distributor',
                       style: TextStyle(color: Colors.white),
@@ -38,7 +46,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 Padding(
                   padding: const EdgeInsets.all(25.0),
                   child: RaisedButton(
-                    onPressed: null,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ConsumerHome()),
+                      );
+                    },
                     child: Text(
                       'Consumer',
                       style: TextStyle(color: Colors.white),
