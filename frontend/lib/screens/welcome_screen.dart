@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/consumer.dart';
+import 'package:frontend/screens/consumer_home.dart';
 import 'package:frontend/screens/login_distributor.dart';
 
 class WelcomeScreen extends StatefulWidget {
