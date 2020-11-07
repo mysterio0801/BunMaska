@@ -48,21 +48,7 @@ var functions = {
         })
     },
     getUserInfo: function(req, res) {
-        if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer'){
-            jwt.verify(req.token, config.secret, (err, authData) => {
-                if(err) {
-                    res.sendStatus(403)
-                } else {
-                    res.json({
-                        message: 'User Info',
-                        authData
-                    })
-                }
-            })
-        }
-        else {
-            return res.json({success: false, msg: 'No Headers'})
-        }
+        res.json({user: req.user})
     },
     getMenuList: async function(req, res){
         try {
@@ -121,21 +107,6 @@ var functions = {
             res.json({
                 message: err
             });
-        }
-    },
-    logout: async function(req,res){
-        try{
-            if (!req.headers['auth-token']){
-                res.json({
-                    msg: 'User not logged in'
-                })
-            }
-            delete req.headers["auth-token"]
-            res.json({msg: 'Successfully logged out'})
-        } catch (err) {
-            res.json({
-                message: err
-            })
         }
     }
 }
