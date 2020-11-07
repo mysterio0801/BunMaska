@@ -5,11 +5,13 @@ var MenuList = require('../models/menu')
 
 var functions = {
     addUser: function (req, res) {
-        if ((!req.body.name) || (!req.body.password) || (!req.body.address) || (!req.body.contact)){
+        if ((!req.body.ownerName) || (!req.body.password) || (!req.body.address) || (!req.body.contact) || (!req.body.email) || (!req.body.shopName) ){
             res.json({success: false, msg: 'Enter all fields'})
         } else {
             var newUser = User({
-                name: req.body.name,
+                email: req.body.email,
+                shopName: req.body.shopName,
+                ownerName: req.body.ownerName,
                 password: req.body.password,
                 contact: req.body.contact,
                 address: req.body.address
@@ -26,7 +28,7 @@ var functions = {
     },
     login: function (req, res) {
         User.findOne({
-            name: req.body.name
+            email: req.body.email
         }, function (err, user){
             if (err) throw err;
             if(!user) {
