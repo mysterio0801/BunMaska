@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/register_distributor.dart';
 
 class LoginDistributor extends StatefulWidget {
   @override
@@ -27,7 +28,7 @@ class _LoginDistributorState extends State<LoginDistributor> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    'Be a part of the BunMaska community.',
+                    'Welcome Back...',
                     style: TextStyle(
                       fontSize: 25,
                     ),
@@ -37,7 +38,9 @@ class _LoginDistributorState extends State<LoginDistributor> {
                 Padding(
                   padding: const EdgeInsets.all(25.0),
                   child: RaisedButton(
-                    onPressed: null,
+                    onPressed: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterDistributor()),);
+                    },
                     child: Text(
                       'Register',
                       style: TextStyle(fontSize: 17, color: Colors.white),
