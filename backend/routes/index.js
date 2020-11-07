@@ -7,12 +7,18 @@ router.get('/', (req,res) => {
 });
 
 //Adding New Vendor
-router.post('/addvendor', actions.addNew)
+router.post('/addUser', actions.addUser)
 
 //Authenticate Vendor
 router.post('/authenticate', actions.authenticate)
 
-//Get Info of a user
-router.get('/getinfo', actions.getInfo)
+//Get Info of a Vendor
+router.get('/getUserinfo', actions.getUserInfo)
+
+//Get MenuList of a vendor
+router.get('/getMenuList',actions.getMenuList)
+
+//Add MenuList of a vendor
+router.post('/addMenuList/:vendor_id', actions.addMenuList)
 
 module.exports = router

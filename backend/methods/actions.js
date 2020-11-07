@@ -1,9 +1,10 @@
 var User = require('../models/user')
 var jwt = require('jwt-simple')
 var config = require('../config/dbConfig')
+var MenuList = require('../models/menu')
 
 var functions = {
-    addNew: function (req, res) {
+    addUser: function (req, res) {
         if ((!req.body.name) || (!req.body.password) || (!req.body.address) || (!req.body.contact)){
             res.json({success: false, msg: 'Enter all fields'})
         } else {
@@ -43,7 +44,7 @@ var functions = {
             }
         })
     },
-    getInfo: function(req, res) {
+    getUserInfo: function(req, res) {
         if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer'){
             var token = req.headers.authorization.split(' ')[1]
             var decodedtoken = jwt.decode(token, config.secret)
@@ -51,6 +52,65 @@ var functions = {
         }
         else {
             return res.json({success: false, msg: 'No Headers'})
+        }
+    },
+    getMenuList: async function(req, res){
+        try {
+            const menuList = await MenuList.find();
+            res.json(menuList);
+        } catch (err) {
+            res.json({ message: err });
+        }
+    },
+    addMenuList: async function(req,res){
+        const menuList = new MenuList({
+            dishName: req.body.dishName,
+            description: req.body.description,
+            availability_present: req.body.availability_present,
+            vendor_id: req.params.vendor_id
+        });
+
+        try {
+            const SavedMenuList = await menuList.save();
+            res.json(SavedMenuList);
+        } catch (err) {
+            res.json({
+                message: err
+            });
+        }
+    },
+    updateMenuList: async function(req,res) {
+        try {
+            const updatedList = await MenuList.updateOne(
+                {
+                    _id: req.params.menu_id,
+                },
+                {
+                    $set: {
+                        dishName: req.body.dishName,
+                        description: req.body.description,
+                        availability_present: req.body.availability_present,
+                    }
+                }
+            );
+            res.json(updatedList);
+        } catch (err) {
+            res.json({
+                message: err
+            });
+        }
+    },
+    deleteMenu: async function(req,res){
+        try{
+            const deletedItem = await MenuList.remove({
+                _id: req.params.menu_id
+            });
+            res.json(deletedItem);
+        }
+        catch(err){
+            res.json({
+                message: err
+            });
         }
     }
 }
