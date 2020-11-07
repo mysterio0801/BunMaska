@@ -1,7 +1,6 @@
 const express = require('express');
 const actions = require('../methods/actions');
 const router = express.Router();
-const passport = require('passport')
 // const { verifyToken } = require('../middlewares/auth');
 const auth = require('../middlewares/auth');
 
