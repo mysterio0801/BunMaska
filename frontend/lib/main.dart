@@ -7,17 +7,17 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-@override
-Widget build(BuildContext context) {
-	return MaterialApp(
-	title: 'BunMaska',
-	theme: OurTheme().buildTheme(),
-  home: WelcomeScreen(),
-  // initialRoute: WelcomeScreen.id,
-  // routes: {
-  //   WelcomeScreen.id: (context) => WelcomeScreen()
-  // },
-	debugShowCheckedModeBanner: false,
-	);
-}
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'BunMaska',
+      theme: OurTheme().buildTheme(),
+      home: WelcomeScreen(),
+      // initialRoute: WelcomeScreen.id,
+      // routes: {
+      //   WelcomeScreen.id: (context) => WelcomeScreen()
+      // },
+      debugShowCheckedModeBanner: false,
+    );
+  }
 }

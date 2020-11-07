@@ -5,11 +5,13 @@ var MenuList = require('../models/menu')
 
 var functions = {
     addUser: function (req, res) {
-        if ((!req.body.name) || (!req.body.password) || (!req.body.address) || (!req.body.contact)){
+        if ((!req.body.ownerName) || (!req.body.password) || (!req.body.address) || (!req.body.contact) || (!req.body.email) || (!req.body.shopName) ){
             res.json({success: false, msg: 'Enter all fields'})
         } else {
             var newUser = User({
-                name: req.body.name,
+                email: req.body.email,
+                shopName: req.body.shopName,
+                ownerName: req.body.ownerName,
                 password: req.body.password,
                 contact: req.body.contact,
                 address: req.body.address
@@ -26,7 +28,7 @@ var functions = {
     },
     login: function (req, res) {
         User.findOne({
-            name: req.body.name
+            email: req.body.email
         }, function (err, user){
             if (err) throw err;
             if(!user) {
@@ -48,21 +50,7 @@ var functions = {
         })
     },
     getUserInfo: function(req, res) {
-        if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer'){
-            jwt.verify(req.token, config.secret, (err, authData) => {
-                if(err) {
-                    res.sendStatus(403)
-                } else {
-                    res.json({
-                        message: 'User Info',
-                        authData
-                    })
-                }
-            })
-        }
-        else {
-            return res.json({success: false, msg: 'No Headers'})
-        }
+        res.json({user: req.user})
     },
     getMenuList: async function(req, res){
         try {
@@ -121,21 +109,6 @@ var functions = {
             res.json({
                 message: err
             });
-        }
-    },
-    logout: async function(req,res){
-        try{
-            if (!req.headers['auth-token']){
-                res.json({
-                    msg: 'User not logged in'
-                })
-            }
-            delete req.headers["auth-token"]
-            res.json({msg: 'Successfully logged out'})
-        } catch (err) {
-            res.json({
-                message: err
-            })
         }
     }
 }

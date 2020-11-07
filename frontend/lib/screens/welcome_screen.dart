@@ -16,7 +16,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Scaffold(
       backgroundColor: Color(0xfffcf5ee),
       appBar: AppBar(
-        title: Text('BunMaska'),
+        title: Center(child: Text('BunMaska')),
       ),
       body: Column(
         children: [
@@ -32,9 +32,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   child: RaisedButton(
                     onPressed: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LoginDistributor()),
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LoginDistributor()),
                       );
                     },
                     child: Text(
@@ -48,9 +48,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   child: RaisedButton(
                     onPressed: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ConsumerHome()),
+                        context,
+                        MaterialPageRoute(builder: (context) => ConsumerHome()),
                       );
                     },
                     child: Text(

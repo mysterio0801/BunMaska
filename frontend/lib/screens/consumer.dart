@@ -9,7 +9,9 @@ class _ConsumerHomeState extends State<ConsumerHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('BunMaska'),),
+      appBar: AppBar(
+        title: Center(child: Text('BunMaska')),
+      ),
       backgroundColor: Color(0xfffcf5ee),
       body: Column(
         children: [
