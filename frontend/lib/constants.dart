@@ -7,7 +7,7 @@ class OurTheme {
       appBarTheme: AppBarTheme(color: Colors.orange[400]),
       //Button Theme
       buttonTheme: ButtonThemeData(
-        buttonColor: Colors.black,
+        buttonColor: Colors.black54,
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         minWidth: 100.0,
         height: 40.0,
