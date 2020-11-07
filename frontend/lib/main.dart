@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/welcome_screen.dart';
+import 'package:frontend/constants.dart';
+import 'package:frontend/screens/welcome_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,9 +11,7 @@ class MyApp extends StatelessWidget {
 Widget build(BuildContext context) {
 	return MaterialApp(
 	title: 'BunMaska',
-	theme: ThemeData(
-		primarySwatch: Colors.green,
-	),
+	theme: OurTheme().buildTheme(),
   home: WelcomeScreen(),
   // initialRoute: WelcomeScreen.id,
   // routes: {
