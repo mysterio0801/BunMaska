@@ -21,4 +21,10 @@ router.get('/getMenuList',actions.getMenuList)
 //Add MenuList of a vendor
 router.post('/addMenuList/:vendor_id', actions.addMenuList)
 
+//Update Menu items
+router.patch('/updateItem/:menu_id', actions.updateMenuList)
+
+//Delete Menu Item
+router.delete('/deleteItem/:menu_id', actions.deleteMenu)
+
 module.exports = router
