@@ -1,6 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/distributor_home.dart';
 import 'package:frontend/screens/register_distributor.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:http/http.dart' as http;
+
+import 'consumer_home.dart';
 
 class LoginDistributor extends StatefulWidget {
   @override
@@ -8,6 +14,11 @@ class LoginDistributor extends StatefulWidget {
 }
 
 class _LoginDistributorState extends State<LoginDistributor> {
+  FlutterSecureStorage storage = FlutterSecureStorage();
+
+  TextEditingController _email = TextEditingController();
+  TextEditingController _password = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,8 +50,10 @@ class _LoginDistributorState extends State<LoginDistributor> {
                 ),
                 SizedBox(height: 40.0),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 5.0),
                   child: TextFormField(
+                    controller: _email,
                     decoration: InputDecoration(
                       hintText: 'Enter your email',
                       prefixIcon: Icon(Icons.alternate_email),
@@ -48,8 +61,10 @@ class _LoginDistributorState extends State<LoginDistributor> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 5.0),
                   child: TextFormField(
+                    controller: _password,
                     obscureText: false,
                     decoration: InputDecoration(
                       hintText: 'Password',
@@ -61,8 +76,27 @@ class _LoginDistributorState extends State<LoginDistributor> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40.0),
                   child: RaisedButton(
-                    onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => DistributorHomeScreen()));
+                    onPressed: () async {
+                      Map<String, String> data = {
+                        "email": _email.text,
+                        "password": _password.text
+                      };
+                      var response = await http.post(
+                          "https://chai-app.herokuapp.com/login",
+                          body: data);
+
+                      if (response.statusCode == 200 ||
+                          response.statusCode == 201) {
+                        Map<String, dynamic> output =
+                            json.decode(response.body);
+                        await storage.write(
+                            key: "token", value: output["token"]);
+
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DistributorHomeScreen()));
+                      }
                     },
                     child: Text(
                       'Log In',
@@ -72,11 +106,15 @@ class _LoginDistributorState extends State<LoginDistributor> {
                 ),
                 FlatButton(
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterDistributor(),),
-                  );
-                }, 
-                child: Text('New User? Register Here'),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => RegisterDistributor(),
+                      ),
+                    );
+                  },
+                  child: Text('New User? Register Here'),
                 ),
               ],
             ),
