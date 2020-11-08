@@ -6,6 +6,8 @@ import 'package:frontend/screens/register_distributor.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
+import 'consumer_home.dart';
+
 class LoginDistributor extends StatefulWidget {
   @override
   _LoginDistributorState createState() => _LoginDistributorState();
@@ -87,14 +89,13 @@ class _LoginDistributorState extends State<LoginDistributor> {
                           response.statusCode == 201) {
                         Map<String, dynamic> output =
                             json.decode(response.body);
-                        print(output["token"]);
                         await storage.write(
                             key: "token", value: output["token"]);
 
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ConsumerHome()));
+                                builder: (context) => DistributorHomeScreen()));
                       }
                     },
                     child: Text(
