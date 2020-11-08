@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/consumer_home.dart';
+import 'package:frontend/screens/distributor_home.dart';
 import 'package:frontend/screens/register_distributor.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
