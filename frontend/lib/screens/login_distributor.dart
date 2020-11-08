@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/consumer_home.dart';
+import 'package:frontend/screens/distributor_home.dart';
 import 'package:frontend/screens/register_distributor.dart';
 
 class LoginDistributor extends StatefulWidget {
@@ -62,7 +62,7 @@ class _LoginDistributorState extends State<LoginDistributor> {
                   padding: const EdgeInsets.symmetric(horizontal: 40.0),
                   child: RaisedButton(
                     onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ConsumerHome()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => DistributorHomeScreen()));
                     },
                     child: Text(
                       'Log In',
