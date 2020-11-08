@@ -1,18 +1,3 @@
-// function verifyToken(req, res, next){
-//     const bearerHeader = req.headers['authorization'];
-//     if(typeof bearerHeader !== 'undefined') {
-//         const bearer = bearerHeader.split(' ')
-//         const bearerToken = bearer[1]
-//         req.token = bearerToken
-//         next()
-//     }
-//     else {
-//         res.sendStatus(403)
-//     }
-// }
-
-// module.exports = {verifyToken}
-
 const jwt = require('jsonwebtoken');
 const config = require('../config/dbConfig');
 
@@ -21,9 +6,15 @@ module.exports = function (req, res, next) {
   const bearerHeader = req.header('authorization');
   const bearer = bearerHeader.split(' ');
   const token = bearer[1];
-  // Check if not token
-  if (!token) {
-    return res.status(401).json({ msg: 'No token, authorization denied' });
+      
+  if(!bearerHeader){
+      return res.status(401).json({msg: "No headers, authorization denied"});
+  }
+  else{
+      // Check if not token
+      if (!token) {
+          return res.status(401).json({ msg: 'No token, authorization denied' });
+      }
   }
 
   // Verify token

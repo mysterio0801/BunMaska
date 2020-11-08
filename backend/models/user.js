@@ -2,21 +2,29 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
 var userSchema = new Schema({
-    name: {
+    shopName: {
         type: String,
-        require: true
+        required: true
+    },
+    ownerName: {
+        type: String,
+        required: true
     },
     password: {
         type: String,
-        require: true
+        required: true
+    },
+    email:{
+        type: String,
+        required: true
     },
     contact: {
         type: String,
-        require: true
+        required: true
     },
     address: {
         type: String,
-        require: true
+        required: true
     }
 })
 
