@@ -55,7 +55,7 @@ var functions = {
     getMenuList: async function(req, res){
         try {
             const menuList = await MenuList.find();
-            res.json(menuList);
+            res.json(menuList,{user: req.user});
         } catch (err) {
             res.json({ message: err });
         }
