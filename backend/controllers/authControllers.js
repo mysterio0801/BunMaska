@@ -1,13 +1,13 @@
-var User = require('../models/user')
+var Distributor = require('../models/user')
 var jwt = require('jsonwebtoken')
 var config = require('../config/dbConfig')
 
-// Post register
+// Post register distributor
 exports.postRegister = (req, res) => {
     if ((!req.body.ownerName) || (!req.body.password) || (!req.body.address) || (!req.body.contact) || (!req.body.email) || (!req.body.shopName) ){
         res.json({success: false, msg: 'Enter all fields'})
     } else {
-        var newUser = User({
+        var newUser = Distributor({
             email: req.body.email,
             shopName: req.body.shopName,
             ownerName: req.body.ownerName,
@@ -26,9 +26,9 @@ exports.postRegister = (req, res) => {
     }
 }
 
-// Post login
+// Post login distributor
 exports.postLogin = (req, res) => {
-    User.findOne({
+    Distributor.findOne({
         email: req.body.email
     }, function (err, user){
         if (err) throw err;
@@ -51,11 +51,11 @@ exports.postLogin = (req, res) => {
     })
 }
 
-// delete user
-esports.deleteUser = async (req, res) => {
+// delete distributor
+exports.deleteUser = async (req, res) => {
     try{
-        const deletedItem = await User.remove({
-            _id: req.params.vendor_id
+        const deletedItem = await Distributor.remove({
+            _id: req.params.user_id
         });
         res.json({deletedItem});
     }
@@ -64,4 +64,10 @@ esports.deleteUser = async (req, res) => {
             message: err
         });
     }
+}
+
+// get distributor details
+exports.getUserDetails = (req, res) => {
+    const distributor = req.user
+    res.json({distributor})
 }
