@@ -18,7 +18,7 @@ router.post('/login', actions.login)
 router.get('/getUserinfo', auth, actions.getUserInfo)
 
 //Get MenuList of a vendor
-router.get('/getMenuList',auth, actions.getMenuList)
+router.get('/getMenuList/:vendor_id',auth, actions.getMenuList)
 
 //Add MenuList of a vendor
 router.post('/addMenuList/:vendor_id', auth,actions.addMenuList)
