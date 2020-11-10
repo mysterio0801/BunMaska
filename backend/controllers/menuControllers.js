@@ -10,8 +10,8 @@ exports.postMenuListItem = async (req,res) => {
     });
 
     try {
-        const SavedMenuList = await menuList.save();
-        res.json(SavedMenuList);
+        const savedMenuList = await menuList.save();
+        res.json({savedMenuList});
     } catch (err) {
         res.json({
             message: err
@@ -34,7 +34,7 @@ exports.updateMenuListItem = async (req,res) => {
     try {
         const updatedList = await MenuList.updateOne(
             {
-                _id: req.params.menu_id,
+                _id: req.params.item_id,
             },
             {
                 $set: {
@@ -56,7 +56,7 @@ exports.updateMenuListItem = async (req,res) => {
 exports.deleteMenuListItem = async (req,res) => {
     try{
         const deletedItem = await MenuList.remove({
-            _id: req.params.menu_id
+            _id: req.params.item_id
         });
         res.json({deletedItem});
     }
