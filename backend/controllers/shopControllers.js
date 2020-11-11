@@ -7,7 +7,7 @@ exports.getShopList = async (req, res) => {
         const shopList = userList.map(user => {
             return {
                 shopName: user.shopName,
-                userId: user._id
+                vendorId: user._id
             }
         });
         res.json({shopList});
