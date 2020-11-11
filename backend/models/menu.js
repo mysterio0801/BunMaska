@@ -11,7 +11,7 @@ var menuSchema = new Schema(
             type: String
         },
         availability_present: {
-            type: String,
+            type: Boolean,
             require: true
         },
         vendor_id: {
