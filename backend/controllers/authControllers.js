@@ -55,7 +55,7 @@ exports.postLogin = (req, res) => {
 exports.deleteUser = async (req, res) => {
     try{
         const deletedItem = await Distributor.remove({
-            _id: req.params.user_id
+            _id: req.user._id
         });
         res.json({deletedItem});
     }
@@ -70,4 +70,29 @@ exports.deleteUser = async (req, res) => {
 exports.getUserDetails = (req, res) => {
     const distributor = req.user
     res.json({distributor})
+}
+
+// update distributor details
+exports.updateUserDetails = async (req,res) => {
+    console.log(req.user._id)
+    try {
+        const updatedDetails = await Distributor.updateOne(
+            {
+                _id: req.user._id,
+            },
+            {
+                $set: {
+                    ownerName: req.body.ownerName,
+                    shopName: req.body.shopName,
+                    address: req.body.address,
+                    contact: req.body.contact
+                }
+            }
+        );
+        res.json({updatedDetails});
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
 }
