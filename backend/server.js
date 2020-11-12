@@ -3,7 +3,7 @@ const morgan = require('morgan')
 const cors = require('cors')
 const connectDB = require('./config/db')
 const bodyParser = require('body-parser')
-const routes = require('./routes/index')
+const routes = require('./routes/routes')
 
 require('dotenv').config()
 
