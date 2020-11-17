@@ -8,8 +8,7 @@ class ConsumerHome extends StatefulWidget {
 }
 
 class _ConsumerHomeState extends State<ConsumerHome> {
-
-  List shops = ['Shop 1', 'Shop 2', 'Shop 3', 'Shop 4'];
+  List shops = ['Shop 1,Shop 2, Shop 3, Shop 4'];
   List status = ['Opened', 'Closed', 'Opened', 'Opened'];
 
   @override
@@ -26,24 +25,30 @@ class _ConsumerHomeState extends State<ConsumerHome> {
           SizedBox(height: 5.0),
           Expanded(
             child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: shops.length,
-              itemBuilder: (BuildContext context, int index){
-                return Card(
-                  child: ListTile(
-                    onTap: () {
-                      selectedshop = shops[index];
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ShopScreen()));
-                    },
-                    title: Text(shops[index]),
-                    subtitle: Text(status[index]),
-                    leading: CircleAvatar(backgroundColor: Colors.orange,
-                    child: Text((index+1).toString(), style: TextStyle(color: Colors.white),),
+                shrinkWrap: true,
+                itemCount: shops.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Card(
+                    child: ListTile(
+                      onTap: () {
+                        selectedshop = shops[index];
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ShopScreen()));
+                      },
+                      title: Text(shops[index]),
+                      subtitle: Text(status[index]),
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.orange,
+                        child: Text(
+                          (index + 1).toString(),
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
                     ),
-                  ),
-                );
-              }
-            ),
+                  );
+                }),
           ),
         ],
       ),

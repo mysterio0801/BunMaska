@@ -5,6 +5,8 @@ import 'package:frontend/screens/distributor_home.dart';
 import 'package:http/http.dart' as http;
 import 'package:form_field_validator/form_field_validator.dart';
 
+import 'package:frontend/screens/login_distributor.dart';
+
 class RegisterDistributor extends StatefulWidget {
   @override
   _RegisterDistributorState createState() => _RegisterDistributorState();
@@ -203,13 +205,13 @@ class _RegisterDistributorState extends State<RegisterDistributor> {
                                 "email": _email
                               };
                               var response = await http
-                                  .post(baseUrl + "addUser", body: data);
-
+                                  .post(baseUrl + "register", body: data);
+                              print(response.body);
                               return Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          DistributorHomeScreen()));
+                                          LoginDistributor()));
                             }),
                       ],
                     )),

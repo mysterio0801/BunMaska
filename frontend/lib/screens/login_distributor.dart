@@ -1,11 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/consumer_home.dart';
 import 'package:frontend/screens/distributor_home.dart';
 import 'package:frontend/screens/register_distributor.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
-
-import 'consumer_home.dart';
 
 class LoginDistributor extends StatefulWidget {
   @override
@@ -121,7 +120,7 @@ class _LoginDistributorState extends State<LoginDistributor> {
                             };
                             var response =
                                 await http.post(baseUrl + "login", body: data);
-
+                            print(response.body);
                             if (response.statusCode == 200 ||
                                 response.statusCode == 201) {
                               Map<String, dynamic> output =
@@ -132,8 +131,7 @@ class _LoginDistributorState extends State<LoginDistributor> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          DistributorHomeScreen()));
+                                      builder: (context) => DistributorHome()));
                             }
                           })
                     ])),
