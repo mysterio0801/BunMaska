@@ -39,7 +39,7 @@ exports.postLogin = (req, res) => {
                 if (isMatch && !err) {
                     var token = jwt.sign({user}, config.secret, (err, token) => {
                         res.json({
-                            token
+                            token,
                         })
                     })
                 }
